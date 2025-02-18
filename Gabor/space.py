@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from Gabor.GaborLayer import GaborConv2d
+from Gabor.Conv_layer import Conv_layer
 import torch
 
 """
@@ -200,15 +200,15 @@ class Recurrent_block(nn.Module):
         return x1
 
 
-class Gabor_block(nn.Module):
+class Conv_block(nn.Module):
     def __init__(self, ch_in, ch_out, t=2):
-        super(Gabor_block, self).__init__()
+        super(Conv_block, self).__init__()
         self.RCNN = nn.Sequential(
             Recurrent_block(ch_out, t=t),
             Recurrent_block(ch_out, t=t)
         )
         # self.Conv_1x1 = nn.Conv2d(ch_in, ch_out, kernel_size=1, stride=1, padding=0)
-        self.Conv_1x1 = GaborConv2d(ch_in, ch_out, kernel_size=(1,1), stride=1, padding=0)
+        self.Conv_1x1 = Conv_layer(ch_in, ch_out, kernel_size=(1,1), stride=1, padding=0)
 
     def forward(self, x):
         x = self.Conv_1x1(x)
