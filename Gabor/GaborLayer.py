@@ -3,7 +3,7 @@ import torch
 from torch.nn import Parameter
 from torch.nn.modules import Conv2d, Module
 
-class GaborConv2d(Module):
+class Conv_layer(Module):
     def __init__(self, in_channels, out_channels, kernel_size,
                  stride=1, padding=0, dilation=1, groups=1, bias=False,
                  padding_mode="zeros"):
