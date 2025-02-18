@@ -114,8 +114,7 @@ class CBAM(nn.Module):
         if not self.no_spatial:
             x_out = self.SpatialGate(x_out)
         return x_out
-# 这个使用了密集的跳跃连接的多级unet 然后每个unet都有注意力机制 后期通过每个不同的注意力的热力图 来证明每个注意力侧重的是不同位置
-# 判别器就是简单的Patchcnn判别器
+
 
 class BasicConv2d(nn.Module):
     def __init__(self, in_planes, out_planes, kernel_size, stride=1, padding=0, dilation=1):
@@ -133,7 +132,7 @@ class BasicConv2d(nn.Module):
         return x
 
 
-# 解码器
+
 class Decoder(nn.Module):
     def __init__(self, c1, c2, c3, c4):
         super(Decoder, self).__init__()
@@ -188,8 +187,7 @@ class Recurrent_block(nn.Module):
         self.ch_out = ch_out
         self.conv = nn.Sequential(
             nn.Conv2d(ch_out, ch_out, kernel_size=3, stride=1, padding=1, bias=True),
-            # 换成Gabor变换
-            # (h-3+2*1)/1+1=h所以最终输入和输出是一样的
+         
             nn.BatchNorm2d(ch_out),
             nn.ReLU(inplace=True)
         )
