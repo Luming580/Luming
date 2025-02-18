@@ -6,7 +6,7 @@ class Generator_com_diff(nn.Module):
     def __init__(self, img_ch=1, output_ch=1, t=2):
         super(Generator_com_diff, self).__init__()
         self.Maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.down11 = Gabor_block(ch_in=img_ch, ch_out=64, t=t)
+        self.down11 = Conv_block(ch_in=img_ch, ch_out=64, t=t)
         self.down21 = RRCNN_block(ch_in=64, ch_out=128, t=t)
         self.down31 = RRCNN_block(ch_in=128, ch_out=256, t=t)
         self.down41 = RRCNN_block(ch_in=256, ch_out=512, t=t)
@@ -29,7 +29,7 @@ class Generator_com_diff(nn.Module):
         self.Up21 = up_conv(ch_in=128, ch_out=64)
         self.updown81 = RRCNN_block(ch_in=64 * 2, ch_out=64, t=t)
 
-        self.Conv_1x1_1 = GaborConv2d(64, output_ch, kernel_size=(1, 1), stride=1, padding=0)
+        self.Conv_1x1_1 = Conv_layer(64, output_ch, kernel_size=(1, 1), stride=1, padding=0)
 
         # --------------------------------------------------------------------------------------------------------
         self.segmentation = DSGNet()
