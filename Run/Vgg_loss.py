@@ -9,7 +9,7 @@ class Vgg19_out(nn.Module):
     def __init__(self, requires_grad=False):
         super(Vgg19_out, self).__init__()
         vgg = models.vgg19(pretrained=False).to(device)  # .cuda()
-        # vgg.load_state_dict(torch.load(r'D:\code\python\pythonProject\updateplus\vgg19-dcbb9e9d.pth'))
+        # vgg.load_state_dict(torch.load(r''))
         vgg.eval()
         vgg_pretrained_features = vgg.features
         # print(vgg_pretrained_features)
