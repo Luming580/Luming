@@ -150,10 +150,7 @@ def train(dataloader, Generator, Discriminator, epoch, save_model_path, optimize
                    ))
 
         
-    logging.info("\n=============================================")
-    logging.info('Epoch %d 生成器loss: %.10f' % (epoch, G_loss / (i + 1)))
-    logging.info('Epoch %d 鉴别器loss: %.10f' % (epoch, D_loss / (i + 1)))
-    logging.info("=============================================\n")
+ 
 
     # --------------------------------------------------------
     #  Save model
