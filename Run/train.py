@@ -142,22 +142,14 @@ def train(dataloader, Generator, Discriminator, epoch, save_model_path, optimize
         # --------------------------------------------------------
         #  Logging Progress
         # --------------------------------------------------------
-        # limit_fake_target = limit_zero2one(mid_fake_target)
-        # limit_real_target = limit_zero2one(target_images)
-        # # Cal ssim psnr
-        # ssim = piq.ssim(limit_fake_target, limit_real_target, data_range=1.).cpu()
-        # psnr = piq.psnr(limit_fake_target, limit_real_target, data_range=1., reduction='none').cpu()
-        # mse = (torch.abs(limit_fake_target - limit_real_target) ** 2).mean()
-        # ---------------------------------------------------------------------------------
+      
 
         logging.info(
             '#TRAIN#{}:Epoch [{:03d}/{:03d}], Step [{:04d}], gan loss: {:.4f}, loss_mae: {:.4f}, loss_mse: {:.4f}, g_loss:{:.4f}'.
             format(datetime.now(), epoch, opt.n_epochs, i, loss_GAN, loss_mae, loss_mse, g_loss,
                    ))
 
-        # --------------------------------------------------------
-        # Recording total loss
-        # --------------------------------------------------------
+        
     logging.info("\n=============================================")
     logging.info('Epoch %d 生成器loss: %.10f' % (epoch, G_loss / (i + 1)))
     logging.info('Epoch %d 鉴别器loss: %.10f' % (epoch, D_loss / (i + 1)))
@@ -189,8 +181,6 @@ def test(test_loader, Generator, epoch, save_model_path):
             ssim_sum += ssim
 
         average_ssim = ssim_sum / test_loader.size
-        # print('Tar:{} :Epoch: {} average_ssim: {} ####  best_ssim: {} bestEpoch: {}'.
-        #       format(datetime.now(), epoch,average_ssim,best_ssim,best_ssim_epoch))
 
         if epoch == 1:
             best_ssim = average_ssim
@@ -199,7 +189,7 @@ def test(test_loader, Generator, epoch, save_model_path):
                 best_ssim = average_ssim
                 best_ssim_epoch = epoch
                 torch.save(Generator.state_dict(), save_model_path + '/Net_epoch_best_Tar_{}.pth'.format(epoch))
-                # print('best epoch:{}'.format(epoch))
+                
 
         logging.info(
             'Tar#TEST#:Epoch:{} average_ssim:{} best_ssim_epoch:{} best_ssim:{}'.format(epoch, average_ssim,
