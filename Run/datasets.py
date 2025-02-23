@@ -68,7 +68,7 @@ def randomGaussian(image, mean=0.1, sigma=0.35):
 
 
 def randomPeper(img):
-    img = np.array(img)  # 将图像转换为NumPy数组
+    img = np.array(img)  
     noiseNum = int(0.0015 * img.shape[0] * img.shape[1])
     for i in range(noiseNum):
 
@@ -138,7 +138,7 @@ class SalObjDataset(data.Dataset):
 
 # dataloader for training
 def get_loader(image_root, target_image_root, gt_root, batchsize, trainsize, shuffle=True, num_workers=0,
-               pin_memory=True):  # 创建数据集实例
+               pin_memory=True):  
     dataset = SalObjDataset(image_root, target_image_root, gt_root, trainsize)
     data_loader = data.DataLoader(dataset=dataset,
                                   batch_size=batchsize,
@@ -164,7 +164,7 @@ class test_dataset:
     def __init__(self, image_root, target_image_root, gt_root, testsize):
         self.testsize = testsize
         self.original_images = [image_root + f for f in os.listdir(image_root) if
-                                f.endswith('.jpg') or f.endswith('.png')]  # 获取图片文件路径列表
+                                f.endswith('.jpg') or f.endswith('.png')]  
         self.target_images = [target_image_root + f for f in os.listdir(target_image_root) if
                               f.endswith('.jpg') or f.endswith('.png')]
         self.gts = [gt_root + f for f in os.listdir(gt_root) if f.endswith('.jpg')
