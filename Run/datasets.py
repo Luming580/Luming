@@ -177,7 +177,7 @@ class test_dataset:
         self.image_transform = transforms.Compose([
             transforms.Resize((self.testsize, self.testsize)),
             transforms.ToTensor(),
-            transforms.Normalize([0.4975], [0.09887])
+            transforms.Normalize([0.4975], [0.5])
         ])
 
         self.gt_transform = transforms.Compose([
